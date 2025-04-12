@@ -1,0 +1,25 @@
+# dependencies
+node_modules/
+
+# build outputs
+dist/
+build/
+
+# env files
+.env
+.env.local
+
+# system files
+.DS_Store
+
+# TypeScript cache
+*.tsbuildinfo
+
+# logs
+*.log
+
+# coverage
+coverage/
+
+
+folder-structre.txt
