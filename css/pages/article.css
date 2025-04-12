@@ -1,0 +1,82 @@
+body{
+    background-color: #f3efef;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.card {
+    margin: 25px;
+    padding: 25px;
+    border-radius: 6px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    background-color: white;
+    max-width: 600px;
+    width: 90%;
+    animation: fadeIn 0.5s ease-in-out;
+
+}
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(5px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+.container{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+.container > *:not(:last-child) {
+    margin-top: 5px;
+}
+.card > h1{
+    display: flex;
+    justify-content: center;
+    color: #2e7d32;
+}
+
+.btn {
+    margin-top: 25px;
+    align-self: flex-end;
+    background-color: #2e7d32;
+    color: white;
+    border-radius: 50px;
+    border:none;
+    padding: 12px 25px;
+    cursor: pointer;
+    transition: transform 0.2s ease, background-color 0.3s ease;
+
+}
+
+.btn:hover {
+    opacity: 0.9;
+    transform: scale(1.05);
+}
+textarea, input {
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 16px;
+    background-color: #f9f9f9;
+    margin-bottom: 15px;
+}
+textarea{
+    height: 200px;
+    resize: none;
+}
+label {
+    display: block;
+    margin-bottom: 2px; /* Reduce the gap between label and input */
+    font-weight: bold;}
+input:focus, textarea:focus {
+    border-color: #2e7d32;
+    outline: none;
+    background-color: #fff;
+}
+
+@media (max-width: 800px) {
+    .card {
+        width: 100%;
+    }
+}
