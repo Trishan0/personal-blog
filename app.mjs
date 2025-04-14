@@ -3,6 +3,7 @@ import { userRouter } from "./src/routes/user.mjs";
 import {articleRouter} from "./src/routes/article.mjs";
 import path from "node:path";
 import {fileURLToPath} from "node:url";
+import {adminRouter} from "./src/routes/admin.js";
 
 
 const __filename = fileURLToPath(import.meta.url);
@@ -12,6 +13,7 @@ const app = express()
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(userRouter)
 app.use(articleRouter)
+app.use(adminRouter)
 
 //set template engine
 app.set('view engine', 'ejs')
