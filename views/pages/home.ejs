@@ -1,0 +1,23 @@
+<%- include('../partials/header') %>
+
+<header>
+    <h1>My Personal Blog</h1>
+</header>
+
+<main>
+    <% articles.forEach(article => { %>
+        <section class="post">
+            <h2><%= article.title %></h2>
+            <p class="date"><%= article.published_date %></p>
+            <p class="excerpt"><%= article.preview %></p>
+            <a href="/articles/<%= article.id %>" class="read-more">Read More</a>
+        </section>
+    <% }) %>
+</main>
+
+
+<footer>
+    <p>&copy; 2025 My Blog</p>
+</footer>
+
+<%- include('../partials/footer') %>
