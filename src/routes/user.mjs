@@ -9,6 +9,6 @@ export const userRouter = Router();
 
 
 
-userRouter.get('/home', (req, res) => {
+userRouter.get(['/','/home'], (req, res) => {
     res.sendFile(path.join(__dirname, '../../pages/home.html'));
 })
