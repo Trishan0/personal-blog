@@ -1,0 +1,25 @@
+{
+  "articles": [
+    {
+      "id": 1,
+      "title": "The Rise of Artificial Intelligence in Everyday Life",
+      "author": "Jane Doe",
+      "published_date": "2025-04-14",
+      "content": "Artificial intelligence (AI) has seen rapid growth over the past decade. It now powers many of the tools we use every day, including virtual assistants like Siri and Alexa, personalized content on streaming services, and advanced features in smartphones. AI algorithms are responsible for optimizing traffic in navigation apps, improving search engine results, and even detecting fraudulent activity in financial transactions.\n\nBeyond these conveniences, AI is making significant strides in industries such as healthcare, where it assists in diagnosing diseases and analyzing medical data faster than human professionals. In education, AI-driven platforms personalize learning experiences, adapting content to individual student needs. Meanwhile, in transportation, autonomous vehicles are being developed and tested with the help of AI systems capable of making complex, real-time decisions.\n\nDespite the benefits, AI also raises concerns about privacy, job displacement, and ethical decision-making. As the technology becomes more advanced, it's crucial for developers, policymakers, and the public to engage in discussions about how AI should be used and regulated. The goal is to harness the potential of AI while ensuring it aligns with human values and serves the greater good."
+    },
+    {
+      "id": 2,
+      "title": "Quantum Computing: A Glimpse Into the Future",
+      "author": "Alex Johnson",
+      "published_date": "2025-03-22",
+      "content": "Quantum computing represents a new frontier in computer science, leveraging the principles of quantum mechanics to process information in ways classical computers cannot. Unlike traditional bits, quantum bits or qubits can exist in multiple states simultaneously, enabling vastly increased computing power. Tech giants like IBM, Google, and startups around the globe are racing to build scalable quantum machines.\n\nWhile the technology is still in its infancy, potential applications are already being explored. These include simulating molecular interactions to accelerate pharmaceutical research, optimizing supply chains, and tackling encryption with quantum algorithms. However, the field also faces significant challenges, such as error correction and qubit stability. Despite the hurdles, progress is steady, and experts believe practical quantum computing could arrive within the next decade."
+    },
+    {
+      "id": 3,
+      "title": "5G and Beyond: What’s Next for Mobile Connectivity?",
+      "author": "Samantha Lee",
+      "published_date": "2025-02-10",
+      "content": "The rollout of 5G has dramatically improved mobile network performance, offering faster speeds, lower latency, and support for more connected devices. It's enabling new use cases like remote surgeries, smart cities, and more immersive AR/VR experiences. Telecom companies worldwide continue to expand 5G coverage, with rural areas gradually gaining access.\n\nBut the conversation is already shifting toward 6G, which is expected to launch commercially by the early 2030s. Researchers envision a future where 6G provides real-time, high-speed connectivity to support technologies like holographic communication and fully autonomous transportation systems. Development will focus on even greater reliability, energy efficiency, and integration with AI-driven infrastructure.\n\nAs we move into this new era, regulators and industry leaders must also consider issues around spectrum availability, cybersecurity, and equitable access to these next-generation networks."
+    }
+  ]
+}
