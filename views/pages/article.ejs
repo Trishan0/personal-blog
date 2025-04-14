@@ -3,6 +3,8 @@
 <header>
     <h1><%= article.title %></h1>
 </header>
+<div class="page-content">
+
 <main>
     <section class="meta">
         <p class="date"><%= article.published_date %></p>
@@ -16,9 +18,9 @@
         </article>
     </section>
 </main>
-
+</div>
 <footer>
-    <p>&copy; 2025 My Blog | <a href="/home">Back to Home</a></p>
+    <p>&copy; 2025 My Blog</p>
 </footer>
-</body>
-</html>
+
+<%- include('../partials/footer') %>
