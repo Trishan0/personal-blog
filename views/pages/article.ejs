@@ -1,0 +1,24 @@
+<%- include('../partials/header') %>
+
+<header>
+    <h1><%= article.title %></h1>
+</header>
+<main>
+    <section class="meta">
+        <p class="date"><%= article.published_date %></p>
+        <p class="author">By <strong><%= article.author %></strong></p>
+    </section>
+    <section class="article-body">
+        <article>
+            <% article.content.split('\n\n').forEach(paragraph => { %>
+                <p><%= paragraph %></p>
+            <% }) %>
+        </article>
+    </section>
+</main>
+
+<footer>
+    <p>&copy; 2025 My Blog | <a href="/home">Back to Home</a></p>
+</footer>
+</body>
+</html>
