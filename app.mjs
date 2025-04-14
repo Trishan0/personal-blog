@@ -8,19 +8,10 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const app = express()
-app.use(userRouter)
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(userRouter)
+app.use(articleRouter)
 
-app.use('/article',articleRouter)
-app.get('/', (req, res)=>{
-    console.log(req)
-    res.json(
-        {
-            message: 'Hello World',
-            name: 'Rahul'
-        }
-    )
-})
 
 
 app.listen(4000, () => {
