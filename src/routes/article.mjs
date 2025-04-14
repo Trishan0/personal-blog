@@ -1,18 +1,21 @@
 import { Router } from "express";
-import data from "../data/article.json" with { type: "json" };
 export const articleRouter = Router();
+import fs from 'fs';
+import path from "node:path";
+import {fileURLToPath} from "node:url";
 
-articleRouter.get("/article/:id", (req, res)=>{
-    const {id} = req.params;
-    if (!id) return res.status(400).json({message: "Please provide an id"})
 
-    const article = data.articles.find(article => article.id === Number(id))
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
-    if (!article) {
-        return res.status(404).json({message: "Article not found"})
-    }
-    return res.status(200).json({
-        message: "Article found",
-        data: article
-    });
+articleRouter.get('/articles/:id', (req, res) => {
+    const { id } = req.params;
+    const articleData = JSON.parse(
+        fs.readFileSync(path.join(__dirname, '../data/article.json'), 'utf-8')
+    );
+
+    const article = articleData.articles.find(a => a.id === parseInt(id));
+    if (!article) return res.status(404).send('Article not found');
+
+    res.render('pages/article', { article });
 });
