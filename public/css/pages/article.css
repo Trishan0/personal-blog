@@ -1,49 +1,34 @@
 /* Meta Section */
 .meta {
     text-align: center;
-    margin-bottom: 30px;
+    margin-bottom: 25px;
 }
 
 .date {
-    color: #888;
-    font-size: 0.9rem;
+    color: #777;
+    font-size: 0.95rem;
     margin-bottom: 5px;
 }
 
 .author {
-    font-size: 0.95rem;
-    color: #555;
+    font-size: 1rem;
+    color: #444;
 }
 
 /* Article Body */
 .article-body article {
-    background-color: #fff;
-    padding: 25px 30px;
-    border-radius: 10px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    background-color: #ffffff;
+    padding: 30px 35px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
 }
 
 .article-body p {
-    font-size: 1.05rem;
-    margin-bottom: 20px;
+    font-size: 1.1rem;
+    margin-bottom: 22px;
     text-align: justify;
-}
-
-/* Footer */
-footer {
-    text-align: center;
-    margin-top: 60px;
-    color: #aaa;
-    font-size: 0.9rem;
-}
-
-footer a {
-    color: #2e7d32;
-    text-decoration: none;
-}
-
-footer a:hover {
-    text-decoration: underline;
+    line-height: 1.8;
 }
 
 /* Responsive */
