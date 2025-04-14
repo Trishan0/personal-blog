@@ -17,3 +17,6 @@ adminRouter.get('/admin/dashboard', (req, res)=>{
         articles: articleData.articles
     })
 })
+adminRouter.get('/admin/new-article', (req, res)=>{
+    res.render('pages/admin/new-article',)
+})
