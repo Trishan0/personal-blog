@@ -16,6 +16,8 @@ userRouter.get(['/', '/home'], (req, res) => {
     );
 
     res.render('pages/home', {
-        articles: articleData.articles
+        articles: articleData.articles,
+        links: ['/css/pages/home.css']
+
     });
 });
