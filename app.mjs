@@ -1,9 +1,9 @@
 import express from 'express';
 import { userRouter } from "./src/routes/user.mjs";
 import {articleRouter} from "./src/routes/article.mjs";
+import {adminRouter} from "./src/routes/admin.mjs";
 import path from "node:path";
 import {fileURLToPath} from "node:url";
-import {adminRouter} from "./src/routes/admin.js";
 
 
 const __filename = fileURLToPath(import.meta.url);
