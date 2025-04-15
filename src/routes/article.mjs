@@ -17,5 +17,8 @@ articleRouter.get('/articles/:id', (req, res) => {
     const article = articleData.articles.find(a => a.id === parseInt(id));
     if (!article) return res.status(404).send('Article not found');
 
-    res.render('pages/article', { article });
+    res.render('pages/article', {
+        article,
+        links: ['/css/pages/new_article.css']
+    });
 });
