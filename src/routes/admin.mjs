@@ -14,9 +14,13 @@ adminRouter.get('/admin/dashboard', (req, res)=>{
     )
 
     res.render('pages/admin/dashboard', {
-        articles: articleData.articles
+        articles: articleData.articles,
+        links: ['/css/pages/dashboard.css']
+
     })
 })
 adminRouter.get('/admin/new-article', (req, res)=>{
-    res.render('pages/admin/new-article',)
+    res.render('pages/admin/new-article',{
+        links: ['/css/pages/new_article.css']
+    })
 })
