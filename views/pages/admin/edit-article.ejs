@@ -1,0 +1,134 @@
+<%- include('../../partials/header') %>
+<header>
+    <h1>Edit Article</h1>
+</header>
+<main>
+    <!-- Add a back button section at the top -->
+
+
+    <form id="edit-article-form" class="form">
+        <input type="hidden" id="article-id" value="<%= article.id %>" />
+
+        <label for="title">Title</label>
+        <input type="text" name="title" id="title" value="<%= article.title %>" required />
+
+        <label for="date">Date</label>
+        <input type="date" id="date" name="date" value="<%= new Date(article.date).toISOString().split('T')[0] %>" required />
+
+        <label for="content">Article</label>
+        <textarea name="content" id="content" required><%= article.content %></textarea>
+<div style="display: flex; justify-content: flex-end; gap: 10px;">
+    <div>
+        <a href="/admin/dashboard" id="discard-btn">
+            <button type="button" class="btn" style="background-color: #757575;">
+                Discard
+            </button>
+        </a>
+    </div>
+    <button type="submit" class="btn">Update Article</button>
+</div>
+    </form>
+</main>
+<footer>
+    <p>&copy; 2025 My Blog</p>
+</footer>
+
+<!-- Include SweetAlert2 from CDN -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert2/11.7.32/sweetalert2.all.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert2/11.7.32/sweetalert2.min.css">
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const form = document.getElementById('edit-article-form');
+        const discardBtn = document.getElementById('discard-btn');
+
+        discardBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+
+            Swal.fire({
+                title: 'Discard changes?',
+                text: "Your unsaved changes will be lost.",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Yes, discard',
+                cancelButtonText: 'No, stay here'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = '/admin/dashboard';
+                }
+            });
+        });
+
+
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const articleId = document.getElementById('article-id').value;
+            const title = document.getElementById('title').value;
+            const date = document.getElementById('date').value;
+            const content = document.getElementById('content').value;
+
+            if (!title || !date || !content) {
+                Swal.fire({
+                    title: 'Error!',
+                    text: 'All fields are required',
+                    icon: 'error'
+                });
+                return;
+            }
+
+            Swal.fire({
+                title: 'Are you sure?',
+                text: 'Do you want to update this article?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Yes, update it!',
+                cancelButtonText: 'No, cancel'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    const updateData = { title, date, content };
+
+                    fetch(`/admin/article/${articleId}`, {
+                        method: 'PUT',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(updateData)
+                    })
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.success) {
+                                Swal.fire({
+                                    title: 'Success!',
+                                    text: 'Article updated successfully',
+                                    icon: 'success',
+                                    timer: 1500,
+                                    showConfirmButton: false
+                                }).then(() => {
+                                    window.location.href = '/admin/dashboard';
+                                });
+                            } else {
+                                Swal.fire({
+                                    title: 'Error!',
+                                    text: data.message || 'Failed to update the article',
+                                    icon: 'error'
+                                });
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Error:', error);
+                            Swal.fire({
+                                title: 'Error!',
+                                text: 'An error occurred while updating the article',
+                                icon: 'error'
+                            });
+                        });
+                }
+            });
+        });
+
+
+    });
+</script>
+
+<%- include('../../partials/footer') %>
