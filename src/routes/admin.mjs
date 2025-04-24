@@ -2,7 +2,7 @@ import { Router } from "express";
 // import path from "node:path";
 // import { fileURLToPath } from "node:url";
 // import fs from "node:fs";
-import { createNewArticle } from "../controllers/admin.controller.mjs";
+import {createNewArticle, deleteArticle} from "../controllers/admin.controller.mjs";
 import {getAllArticles} from "../controllers/user.controller.js"
 
 // const __filename = fileURLToPath(import.meta.url);
@@ -31,3 +31,4 @@ adminRouter.get('/admin/new-article', (req, res)=>{
 
 adminRouter.post('/admin/new-article', createNewArticle)
 adminRouter.get('/admin/dashboard',getAllArticles('pages/admin/dashboard','/css/pages/dashboard.css'))
+adminRouter.delete('/admin/article/:id', deleteArticle)
