@@ -22,11 +22,12 @@ export const adminRouter = Router();
 //
 //     })
 // })
-// adminRouter.get('/admin/new-article', (req, res)=>{
-//     res.render('pages/admin/new-article',{
-//         links: ['/css/pages/new_article.css']
-//     })
-// })
+
+adminRouter.get('/admin/new-article', (req, res)=>{
+    res.render('pages/admin/new-article',{
+        links: ['/css/pages/new_article.css']
+    })
+})
 
 adminRouter.post('/admin/new-article', createNewArticle)
 adminRouter.get('/admin/dashboard',getAllArticles('pages/admin/dashboard','/css/pages/dashboard.css'))
