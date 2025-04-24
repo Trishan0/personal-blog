@@ -5,20 +5,23 @@
 </header>
 
 <div class="page-content">
-<main>
-    <% articles.forEach(article => { %>
-        <section class="post">
-            <h2><%= article.title %></h2>
-            <p class="date"><%= article.published_date %></p>
-            <p class="excerpt"><%= article.preview %></p>
-            <a href="/articles/<%= article.id %>" class="read-more">Read More</a>
-        </section>
-    <% }) %>
-</main>
+    <main>
+        <% if (articles.length >0) { %>
+            <% articles.forEach(article => { %>
+                <section class="post">
+                    <h2><%= article.title %></h2>
+                    <p class="date"><%= article.date.toDateString() %></p>
+                    <p class="excerpt"><%= article.content.substring(0, 90) %>...</p>
+                    <a href="/article/<%= article.id %>" class="read-more">Read More</a>
+                </section>
+            <% }) %>
+        <% } else { %>
+            <p>No articles found.</p>
+        <% } %>
+    </main>
 </div>
+    <footer>
+        <p>&copy; 2025 My Blog</p>
+    </footer>
 
-<footer>
-    <p>&copy; 2025 My Blog</p>
-</footer>
-
-<%- include('../partials/footer') %>
+    <%- include('../partials/footer') %>

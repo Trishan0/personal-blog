@@ -7,7 +7,7 @@
 
 <main>
     <section class="meta">
-        <p class="date"><%= article.published_date %></p>
+        <p class="date"><%= article.date.toDateString() %></p>
         <p class="author">By <strong><%= article.author %></strong></p>
     </section>
     <section class="article-body">
