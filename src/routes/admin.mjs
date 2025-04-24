@@ -2,6 +2,7 @@ import { Router } from "express";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import fs from "node:fs";
+import { createNewArticle } from "../controllers/admin.controller.mjs";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -24,3 +25,4 @@ adminRouter.get('/admin/new-article', (req, res)=>{
         links: ['/css/pages/new_article.css']
     })
 })
+adminRouter.post('/admin/new-article', createNewArticle)
