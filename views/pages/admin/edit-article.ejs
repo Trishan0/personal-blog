@@ -5,33 +5,46 @@
 <main>
     <!-- Add a back button section at the top -->
 
+    <div class="container">
+        <div class="page-content">
+            <div class="form-container">
+                <h1 class="form-title">Create New Article</h1>
 
-    <form id="edit-article-form" class="form">
-        <input type="hidden" id="article-id" value="<%= article.id %>" />
+                <form class="form" action="" method="post">
+                    <input type="hidden" id="article-id" value="<%= article.id %>" />
 
-        <label for="title">Title</label>
-        <input type="text" name="title" id="title" value="<%= article.title %>" required />
+                    <div class="form-group">
+                        <label for="title" class="form-label">Article Title</label>
+                        <input type="text" id="title" name="title" class="form-control" placeholder="Enter article title" value="<%= article.title %>" required>
+                    </div>
 
-        <label for="date">Date</label>
-        <input type="date" id="date" name="date" value="<%= new Date(article.date).toISOString().split('T')[0] %>" required />
+<!--                    <div class="form-group">-->
+<!--                        <label for="author" class="form-label">Author</label>-->
+<!--                        <input type="text" id="author" name="author" class="form-control" placeholder="Enter author name" required>-->
+<!--                    </div>-->
 
-        <label for="content">Article</label>
-        <textarea name="content" id="content" required><%= article.content %></textarea>
-<div style="display: flex; justify-content: flex-end; gap: 10px;">
-    <div>
-        <a href="/admin/dashboard" id="discard-btn">
-            <button type="button" class="btn" style="background-color: #757575;">
-                Discard
-            </button>
-        </a>
+                    <div class="form-group">
+                        <label for="date" class="form-label">Publication Date</label>
+                        <input type="date" id="date" name="date" class="form-control"  value="<%= new Date(article.date).toISOString().split('T')[0] %>" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="content" class="form-label">Article Content</label>
+                        <textarea id="content" name="content" class="form-control" placeholder="Write your article content here" rows="10" required><%= article.content %></textarea>
+                    </div>
+
+                    <div class="form-actions">
+                        <a href="/admin/dashboard" id="discard-btn">
+                        <button type="button" class="btn btn-danger">Discard</button>
+                        </a>
+                        <button type="submit" class="btn">Publish Article</button>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
-    <button type="submit" class="btn">Update Article</button>
-</div>
-    </form>
 </main>
-<footer>
-    <p>&copy; 2025 My Blog</p>
-</footer>
+
 
 <!-- Include SweetAlert2 from CDN -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert2/11.7.32/sweetalert2.all.min.js"></script>

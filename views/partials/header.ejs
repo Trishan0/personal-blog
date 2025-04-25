@@ -3,35 +3,68 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Document</title>
+    <title>Modern Personal Blog</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/css/main.css" />
-    <link rel="stylesheet" href="/css/components/navbar.css"/>
 
     <% let stylesheets = (typeof links !== 'undefined') ? links : []; %>
     <% for (let i = 0; i < stylesheets.length; i++) { %>
         <link rel="stylesheet" href="<%= stylesheets[i] %>"/>
     <% } %>
-
 </head>
 <body>
 <nav>
-    <ul class="sidebar">
-        <li onclick=hideSidebar()><a href="#"><svg xmlns="http://www.w3.org/2000/svg" height="26" viewBox="0 96 960 960" width="26" fill="#fff"><path d="m249 849-42-42 231-231-231-231 42-42 231 231 231-231 42 42-231 231 231 231-42 42-231-231-231 231Z"/></svg></a></li>
-        <li><a href="/home">Home</a></li>
-        <!-- <li><a href="/admin/new-article">New</a></li>
-        <li><a href="#">Edit</a></li> -->
-        <li><a href="/admin/dashboard">Dashboard</a></li>
-        <li class="log-in"><a href="#">Login</a></li>
-        <li class="log-out"><a href="#">Logout</a></li>
-    </ul>
-    <ul>
-        <li class="hideOnMobile"><a href="/">Personal Blog</a></li>
-        <li class="hideOnMobile"><a href="/home">Home</a></li>
-        <!-- <li class="hideOnMobile"><a href="/admin/new-article">New</a></li>
-        <li class="hideOnMobile"><a href="#">Edit</a></li> -->
-        <li class="hideOnMobile"><a href="/admin/dashboard">Dashboard</a></li>
-        <li class="log-in hideOnMobile"><a href="#">Login</a></li>
-        <li class="log-out hideOnMobile"><a href="#">Logout</a></li>
-        <li class="menu-button" onclick=showSidebar()><a href="#"><svg xmlns="http://www.w3.org/2000/svg" height="26" viewBox="0 96 960 960" width="26" fill="#fff"><path d="M120 816v-60h720v60H120Zm0-210v-60h720v60H120Zm0-210v-60h720v60H120Z"/></svg></a></li>
-    </ul>
+    <div class="container">
+        <div class="navbar">
+            <a href="/" class="navbar-brand">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+                    <path d="M20.71,4.63L19.37,3.29C19,2.9 18.35,2.9 17.96,3.29L9,12.25L11.75,15L20.71,6.04C21.1,5.65 21.1,5 20.71,4.63M7,14A3,3 0 0,0 4,17C4,18.31 2.84,19 2,19C2.92,20.22 4.5,21 6,21A4,4 0 0,0 10,17A3,3 0 0,0 7,14Z" />
+                </svg>
+                Personal Blog
+            </a>
+
+            <ul class="navbar-menu">
+                <li><a href="/" class="active">Home</a></li>
+                <li><a href="/admin/new-article">New Article</a></li>
+                <li><a href="/admin/dashboard">Dashboard</a></li>
+            </ul>
+
+            <div class="navbar-auth">
+                <a href="#" class="btn btn-outline btn-small login-btn">Login</a>
+            </div>
+
+            <button class="nav-toggle" aria-label="Toggle menu" onclick="toggleMobileMenu()">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                    <path d="M3,6H21V8H3V6M3,11H21V13H3V11M3,16H21V18H3V16Z" />
+                </svg>
+            </button>
+        </div>
+    </div>
 </nav>
+
+<div class="mobile-menu" id="mobileMenu">
+    <div class="mobile-menu-header">
+        <div class="navbar-brand">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+                <path d="M20.71,4.63L19.37,3.29C19,2.9 18.35,2.9 17.96,3.29L9,12.25L11.75,15L20.71,6.04C21.1,5.65 21.1,5 20.71,4.63M7,14A3,3 0 0,0 4,17C4,18.31 2.84,19 2,19C2.92,20.22 4.5,21 6,21A4,4 0 0,0 10,17A3,3 0 0,0 7,14Z" />
+            </svg>
+            Personal Blog
+        </div>
+        <button class="mobile-menu-close" aria-label="Close menu" onclick="toggleMobileMenu()">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <path d="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z" />
+            </svg>
+        </button>
+    </div>
+
+    <ul class="mobile-menu-items">
+        <li><a href="/">Home</a></li>
+        <li><a href="/admin/new-article">New Article</a></li>
+        <li><a href="/admin/dashboard">Dashboard</a></li>
+        <li><a href="#">Login</a></li>
+    </ul>
+</div>
+
+<div class="overlay" id="overlay" onclick="toggleMobileMenu()"></div>

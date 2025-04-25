@@ -1,41 +1,38 @@
 <%- include('../../partials/header') %>
-<header>
-    <h1>Admin Dashboard</h1>
-</header>
-<main>
-    <div class="container">
-        <section class="top-bar">
-            <h2>Personal Blog</h2>
-            <a href="/admin/new-article">
-                <button class="btn">
-                    <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            viewBox="0 -960 960 960"
-                            fill="#fff"
-                    >
-                        <path d="M440-440H200v-80h240v-240h80v240h240v80H520v240h-80v-240Z"/>
+
+<div class="container">
+    <div class="page-content">
+        <div class="admin-header">
+            <h1 class="admin-title">Admin Dashboard</h1>
+            <div class="admin-actions">
+                <a href="/admin/new-article" class="btn">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z" />
                     </svg>
-                    Add Article
-                </button>
-            </a>
-        </section>
-        <section class="content">
-            <h3>Published Articles</h3>
-            <% articles.forEach(article => { %>
-                <div class="line">
-                    <p><%= article.title %></p>
-                    <div class="line-btn">
-                        <button class="admin-btn edit" data-id="<%= article.id %>">Edit</button>
-                        <button class="admin-btn delete" data-id="<%= article.id %>">Delete</button>
+                    New Article
+                </a>
+            </div>
+        </div>
+
+        <div class="admin-card">
+            <div class="admin-card-header">
+                <h2 class="admin-card-title">Published Articles</h2>
+            </div>
+
+            <div class="article-list">
+                <% articles.forEach(article => { %>
+                    <div class="article-item">
+                        <span class="article-item-title"><%= article.title %></span>
+                        <div class="article-item-actions">
+                            <button class="btn btn-small admin-btn edit"  data-id="<%= article.id %>">Edit</button>
+                            <button class="btn btn-small btn-danger admin-btn delete"  data-id="<%= article.id %>">Delete</button>
+                        </div>
                     </div>
-                </div>
-            <% }) %>
-        </section>
+                <% }) %>
+            </div>
+        </div>
     </div>
-</main>
-<footer>
-    <p>&copy; 2025 My Blog</p>
-</footer>
+</div>
 
 <!-- Include SweetAlert2 from CDN -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert2/11.7.32/sweetalert2.all.min.js"></script>

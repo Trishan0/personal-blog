@@ -1,23 +1,38 @@
 <%- include('../../partials/header') %>
-<header>
-    <h1>New Article</h1>
-</header>
-<main>
-    <form action="/admin/new-article" method="post" class="form">
-        <label for="title">Title</label>
-        <input type="text" name="title" id="title" placeholder="Article Title" required />
 
-        <label for="date">Date</label>
-        <input type="date" id="date" name="date" required />
+<div class="container">
+    <div class="page-content">
+        <div class="form-container">
+            <h1 class="form-title">Create New Article</h1>
 
-        <label for="content">Article</label>
-        <textarea name="content" id="content" placeholder="Article Content" required></textarea>
+            <form class="form" action="" method="post">
+                <div class="form-group">
+                    <label for="title" class="form-label">Article Title</label>
+                    <input type="text" id="title" name="title" class="form-control" placeholder="Enter article title" required>
+                </div>
 
-        <button type="submit" class="btn">Publish</button>
-    </form>
-</main>
-<footer>
-    <p>&copy; 2025 My Blog</p>
-</footer>
+<!--                <div class="form-group">-->
+<!--                    <label for="author" class="form-label">Author</label>-->
+<!--                    <input type="text" id="author" name="author" class="form-control" placeholder="Enter author name" required>-->
+<!--                </div>-->
+
+                <div class="form-group">
+                    <label for="date" class="form-label">Publication Date</label>
+                    <input type="date" id="date" name="date" class="form-control" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="content" class="form-label">Article Content</label>
+                    <textarea id="content" name="content" class="form-control" placeholder="Write your article content here" rows="10" required></textarea>
+                </div>
+
+                <div class="form-actions">
+                    <button type="button" class="btn btn-outline">Save Draft</button>
+                    <button type="submit" class="btn">Publish Article</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 
 <%- include('../../partials/footer') %>

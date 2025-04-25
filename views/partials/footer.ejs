@@ -1,13 +1,47 @@
+<footer>
+    <div class="container">
+        <div class="footer-content">
+            <div class="footer-copyright">
+                <p>&copy; 2025 Personal Blog. All rights reserved.</p>
+            </div>
+            <div class="footer-links">
+                <a href="/">Home</a>
+                <a href="/admin/dashboard">Dashboard</a>
+                <a href="#">About</a>
+                <a href="#">Contact</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
 <script>
-    function showSidebar(){
-        const sidebar = document.querySelector('.sidebar')
-        sidebar.style.display = 'flex'
+    function toggleMobileMenu() {
+        const mobileMenu = document.getElementById('mobileMenu');
+        const overlay = document.getElementById('overlay');
+
+        mobileMenu.classList.toggle('active');
+        overlay.classList.toggle('active');
+
+        if (mobileMenu.classList.contains('active')) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = '';
+        }
     }
 
-    function hideSidebar(){
-        const sidebar = document.querySelector('.sidebar')
-        sidebar.style.display = 'none'
-    }
+    // Set active link based on current page
+    document.addEventListener('DOMContentLoaded', () => {
+        const currentPath = window.location.pathname;
+        const navLinks = document.querySelectorAll('.navbar-menu a, .mobile-menu-items a');
+
+        navLinks.forEach(link => {
+            if (link.getAttribute('href') === currentPath) {
+                link.classList.add('active');
+            } else {
+                link.classList.remove('active');
+            }
+        });
+    });
 </script>
 </body>
 </html>
