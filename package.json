@@ -21,6 +21,15 @@
   },
   "devDependencies": {
     "eslint": "^9.25.1",
-    "nodemon": "^3.1.9"
-  }
+    "nodemon": "^3.1.10"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Trishan0/personal-blog.git"
+  },
+  "keywords": [],
+  "bugs": {
+    "url": "https://github.com/Trishan0/personal-blog/issues"
+  },
+  "homepage": "https://github.com/Trishan0/personal-blog#readme"
 }
