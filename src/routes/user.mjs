@@ -2,7 +2,7 @@ import { Router } from "express";
 // import path from "node:path";
 // import { fileURLToPath } from "node:url";
 // import fs from "node:fs";
-import {getAllArticles} from "../controllers/user.controller.js"
+import {getAllArticles} from "../controllers/user.controller.mjs"
 
 // const __filename = fileURLToPath(import.meta.url);
 // const __dirname = path.dirname(__filename);
