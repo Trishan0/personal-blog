@@ -2,6 +2,7 @@ import express from 'express';
 import { userRouter } from "./src/routes/user.mjs";
 import {articleRouter} from "./src/routes/article.mjs";
 import {adminRouter} from "./src/routes/admin.mjs";
+import {authRouter} from "./src/routes/auth.mjs";
 import path from "node:path";
 import {fileURLToPath} from "node:url";
 import { connectToDB } from "./src/database/db.mjs";
@@ -17,6 +18,7 @@ app.use(express.json());
 app.use(userRouter)
 app.use(articleRouter)
 app.use(adminRouter)
+app.use(authRouter)
 
 //set template engine
 app.set('view engine', 'ejs')
