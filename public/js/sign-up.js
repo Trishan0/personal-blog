@@ -19,135 +19,120 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-
     // Initialize with login form
-    loginSwitch.style.color = '#2e7d32';
-    loginSwitch.style.fontWeight = 'bold';
-    registerSwitch.style.color = '#757575';
-    loginForm.classList.remove('hide');
-    registerForm.classList.add('hide');
-    hideElements(regDes)
-    showElements(loginDes)
-
-
-    // Switch to login form
-    loginSwitch.addEventListener('click', () => {
-        switchSelector.style.transform = 'translateX(0)';
+    if (loginSwitch) {
         loginSwitch.style.color = '#2e7d32';
         loginSwitch.style.fontWeight = 'bold';
+    }
+    if (registerSwitch) {
         registerSwitch.style.color = '#757575';
-        registerSwitch.style.fontWeight = 'normal';
-
+    }
+    if (loginForm) {
         loginForm.classList.remove('hide');
+    }
+    if (registerForm) {
         registerForm.classList.add('hide');
-        hideElements(regDes)
-        showElements(loginDes)
+    }
+    hideElements(regDes);
+    showElements(loginDes);
 
+    // Switch to login form
+    if (loginSwitch) {
+        loginSwitch.addEventListener('click', () => {
+            switchSelector.style.transform = 'translateX(0)';
+            loginSwitch.style.color = '#2e7d32';
+            loginSwitch.style.fontWeight = 'bold';
+            registerSwitch.style.color = '#757575';
+            registerSwitch.style.fontWeight = 'normal';
 
+            loginForm.classList.remove('hide');
+            registerForm.classList.add('hide');
+            hideElements(regDes);
+            showElements(loginDes);
 
-        // Reset animation
-        loginForm.style.animation = 'none';
-        loginForm.offsetHeight; // Trigger reflow
-        loginForm.style.animation = 'fadeIn 0.5s ease-out forwards';
-    });
+            // Reset animation
+            loginForm.style.animation = 'none';
+            loginForm.offsetHeight; // Trigger reflow
+            loginForm.style.animation = 'fadeIn 0.5s ease-out forwards';
+        });
+    }
 
     // Switch to register form
-    registerSwitch.addEventListener('click', () => {
-        switchSelector.style.transform = 'translateX(100%)';
-        registerSwitch.style.color = '#2e7d32';
-        registerSwitch.style.fontWeight = 'bold';
-        loginSwitch.style.color = '#757575';
-        loginSwitch.style.fontWeight = 'normal';
+    if (registerSwitch) {
+        registerSwitch.addEventListener('click', () => {
+            switchSelector.style.transform = 'translateX(100%)';
+            registerSwitch.style.color = '#2e7d32';
+            registerSwitch.style.fontWeight = 'bold';
+            loginSwitch.style.color = '#757575';
+            loginSwitch.style.fontWeight = 'normal';
 
-        registerForm.classList.remove('hide');
-        loginForm.classList.add('hide');
-        hideElements(loginDes)
-        showElements(regDes)
-        // Reset animation
-        registerForm.style.animation = 'none';
-        registerForm.offsetHeight; // Trigger reflow
-        registerForm.style.animation = 'fadeIn 0.5s ease-out forwards';
-    });
-
-    // Form validation - simple example
-    const loginFormEl = loginForm.querySelector('form');
-    const registerFormEl = registerForm.querySelector('form');
-
-    loginFormEl.addEventListener('submit', (e) => {
-        e.preventDefault();
-        const email = document.getElementById('login-email').value;
-        const password = document.getElementById('login-password').value;
-
-        if (!email || !password) {
-            alert('Please fill in all fields');
-            return;
-        }
-
-        // Here you would normally send the data to your server
-        console.log('Login form submitted', { email, password });
-
-        // Animation feedback
-        const btn = loginFormEl.querySelector('button[type="submit"]');
-        btn.innerHTML = 'Signing in...';
-        btn.disabled = true;
-
-        setTimeout(() => {
-            btn.innerHTML = 'Success! Redirecting...';
-            btn.style.backgroundColor = '#60ad5e';
-
-            setTimeout(() => {
-                btn.innerHTML = 'Sign in';
-                btn.disabled = false;
-                btn.style.backgroundColor = '#2e7d32';
-            }, 2000);
-        }, 1500);
-    });
-
-    registerFormEl.addEventListener('submit', (e) => {
-        e.preventDefault();
-        const firstName = document.getElementById('first-name').value;
-        const lastName = document.getElementById('last-name').value;
-        const email = document.getElementById('register-email').value;
-        const password = document.getElementById('register-password').value;
-        const confirmPassword = document.getElementById('confirm-password').value;
-        const terms = document.getElementById('terms').checked;
-
-        if (!firstName || !lastName || !email || !password || !confirmPassword) {
-            alert('Please fill in all fields');
-            return;
-        }
-
-        if (password !== confirmPassword) {
-            alert('Passwords do not match');
-            return;
-        }
-
-        if (!terms) {
-            alert('Please agree to the terms');
-            return;
-        }
-
-        // Here you would normally send the data to your server
-        console.log('Register form submitted', {
-            firstName, lastName, email, password, terms
+            registerForm.classList.remove('hide');
+            loginForm.classList.add('hide');
+            hideElements(loginDes);
+            showElements(regDes);
+            // Reset animation
+            registerForm.style.animation = 'none';
+            registerForm.offsetHeight; // Trigger reflow
+            registerForm.style.animation = 'fadeIn 0.5s ease-out forwards';
         });
+    }
 
-        // Animation feedback
-        const btn = registerFormEl.querySelector('button[type="submit"]');
-        btn.innerHTML = 'Creating account...';
-        btn.disabled = true;
+    // Form validations
+    if (loginForm) {
+        const loginFormEl = loginForm.querySelector('form');
+        loginFormEl.addEventListener('submit', (e) => {
+            // Allow the normal form submission to proceed
+            const email = document.getElementById('login-email').value;
+            const password = document.getElementById('login-password').value;
 
-        setTimeout(() => {
-            btn.innerHTML = 'Account created!';
-            btn.style.backgroundColor = '#60ad5e';
+            if (!email || !password) {
+                e.preventDefault(); // Only prevent if validation fails
+                alert('Please fill in all fields');
+                return;
+            }
 
-            setTimeout(() => {
-                btn.innerHTML = 'Create Account';
-                btn.disabled = false;
-                btn.style.backgroundColor = '#2e7d32';
-            }, 2000);
-        }, 1500);
-    });
+            // Visual feedback only - don't prevent default
+            const btn = loginFormEl.querySelector('button[type="submit"]');
+            btn.innerHTML = 'Signing in...';
+            // Don't disable the button or it won't submit
+        });
+    }
+
+    if (registerForm) {
+        const registerFormEl = registerForm.querySelector('form');
+        registerFormEl.addEventListener('submit', (e) => {
+            const firstName = document.getElementById('firstname').value;
+            const lastName = document.getElementById('lastname').value;
+            const email = document.getElementById('register-email').value;
+            const password = document.getElementById('register-password').value;
+            const confirmPassword = document.getElementById('confirm-password').value;
+            const terms = document.getElementById('terms').checked;
+
+            // Validation
+            if (!firstName || !lastName || !email || !password || !confirmPassword) {
+                e.preventDefault();
+                alert('Please fill in all fields');
+                return;
+            }
+
+            if (password !== confirmPassword) {
+                e.preventDefault();
+                alert('Passwords do not match');
+                return;
+            }
+
+            if (!terms) {
+                e.preventDefault();
+                alert('Please agree to the terms');
+                return;
+            }
+
+            // Visual feedback only - don't prevent default if validation passes
+            const btn = registerFormEl.querySelector('button[type="submit"]');
+            btn.innerHTML = 'Creating account...';
+            // Don't disable the button or it won't submit
+        });
+    }
 
     // Add input focus effects
     const inputs = document.querySelectorAll('.form-input');
