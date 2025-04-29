@@ -72,7 +72,14 @@ const loginUser = async (req, res) => {
                 message: "User not found"
             })
         }
+        const isPwdMatch = await bcrypt.compare(password,user.password)
 
+        if (!isPwdMatch) {
+            return res.status(400).json({
+                success: false,
+                message: "Invalid Password"
+            })
+        }
         const accessToken = jwt.sign({
             userId : user._id,
             email : user.email,
