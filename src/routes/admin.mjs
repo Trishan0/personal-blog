@@ -4,6 +4,8 @@ import { Router } from "express";
 // import fs from "node:fs";
 import {createNewArticle, deleteArticle, getArticleForEdit, updateArticle} from "../controllers/admin.controller.mjs";
 import {getAllArticles} from "../controllers/user.controller.mjs"
+import { isAdmin, } from "../middleware/admin.middleware.mjs";
+import { authMiddleware } from "../middleware/auth.middleware.mjs";
 
 // const __filename = fileURLToPath(import.meta.url);
 // const __dirname = path.dirname(__filename);
@@ -23,14 +25,14 @@ export const adminRouter = Router();
 //     })
 // })
 
-adminRouter.get('/admin/new-article', (req, res)=>{
+adminRouter.get('/admin/new-article', authMiddleware, isAdmin, (req, res)=>{
     res.render('pages/admin/new-article',{
         links: ['/css/pages/new_article.css']
     })
 })
 
-adminRouter.post('/admin/new-article', createNewArticle)
-adminRouter.get('/admin/dashboard',getAllArticles('pages/admin/dashboard','/css/pages/dashboard.css'))
-adminRouter.delete('/admin/article/:id', deleteArticle)
-adminRouter.get('/admin/edit-article/:id', getArticleForEdit);
-adminRouter.put('/admin/article/:id', updateArticle);
+adminRouter.post('/admin/new-article', authMiddleware, isAdmin, createNewArticle)
+adminRouter.get('/admin/dashboard',authMiddleware, isAdmin,getAllArticles('pages/admin/dashboard','/css/pages/dashboard.css'))
+adminRouter.delete('/admin/article/:id', authMiddleware, isAdmin, deleteArticle)
+adminRouter.get('/admin/edit-article/:id', authMiddleware, isAdmin, getArticleForEdit);
+adminRouter.put('/admin/article/:id', authMiddleware, isAdmin, updateArticle);
