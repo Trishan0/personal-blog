@@ -32,7 +32,6 @@ const getAllArticles = (viewName = 'pages/home', cssFile) => {
                     articles,
                     links: [cssFile]
                 });
-                console.log(articles);
             } else {
                 res.status(404).json({
                     success: false,
