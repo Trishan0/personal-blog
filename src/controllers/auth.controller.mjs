@@ -1,9 +1,20 @@
 import { User } from "../models/user.mjs"
 import bcrypt from "bcryptjs"
+import jwt from "jsonwebtoken"
 //register user
 const registerUser = async (req, res) => {
     try {
+        console.log("Form data received:", req.body); // Add this for debugging
+
         const { firstname, lastname, email, password } = req.body;
+
+        // Validation
+        if (!firstname || !lastname || !email || !password) {
+            return res.status(400).json({
+                success: false,
+                message: "All fields are required"
+            });
+        }
 
         const isUserExist = await User.findOne({email})
         if (isUserExist) {
@@ -29,26 +40,59 @@ const registerUser = async (req, res) => {
         await newUser.save();
 
         if (newUser) {
-            res.status(201).json({
-                success: true,
-                message: "User created successfully",
-                data: newUser
-            })
+            // Use res.redirect() for HTML form submissions
+            return res.status(201).redirect('/');
         } else {
-            res.status(400).json({
+            return res.status(400).json({
                 success: false,
                 message: "Something went wrong while creating user"
             })
         }
 
     } catch (error) {
-        console.log(error)
-        res.status(500).json({
+        console.error("Registration error:", error); // Better error logging
+        return res.status(500).json({
             success: false,
             message: "Something went wrong",
-            error: error
+            error: error.message
         })
     }
 }
 
-export { registerUser }
+
+const loginUser = async (req, res) => {
+    try {
+        const { email, password } = req.body;
+
+        const user = await User.findOne({email});
+
+        if (!user) {
+            return res.status(400).json({
+                success: false,
+                message: "User not found"
+            })
+        }
+
+        const accessToken = jwt.sign({
+            userId : user._id,
+            email : user.email,
+            role : user.role
+        }, process.env.JWT_SECRET, {
+            expiresIn: "1h"
+        })
+
+        res.status(201).redirect('/');
+
+
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: "Something went wrong",
+            error: error.message
+        })
+    }
+}
+export {
+    registerUser,
+    loginUser
+}
