@@ -32,7 +32,7 @@ adminRouter.get('/admin/new-article', authMiddleware, isAdmin, (req, res)=>{
 })
 
 adminRouter.post('/admin/new-article', authMiddleware, isAdmin, createNewArticle)
-adminRouter.get('/admin/dashboard',authMiddleware, isAdmin,getAllArticles('pages/admin/dashboard','/css/pages/dashboard.css'))
+adminRouter.get('/admin/dashboard',authMiddleware, getAllArticles('pages/admin/dashboard','/css/pages/dashboard.css'))
 adminRouter.delete('/admin/article/:id', authMiddleware, isAdmin, deleteArticle)
 adminRouter.get('/admin/edit-article/:id', authMiddleware, isAdmin, getArticleForEdit);
 adminRouter.put('/admin/article/:id', authMiddleware, isAdmin, updateArticle);
