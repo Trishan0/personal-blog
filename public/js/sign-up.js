@@ -105,21 +105,15 @@ document.addEventListener('DOMContentLoaded', () => {
             const lastName = document.getElementById('lastname').value;
             const email = document.getElementById('register-email').value;
             const password = document.getElementById('register-password').value;
-            const confirmPassword = document.getElementById('confirm-password').value;
             const terms = document.getElementById('terms').checked;
 
             // Validation
-            if (!firstName || !lastName || !email || !password || !confirmPassword) {
+            if (!firstName || !lastName || !email || !password) {
                 e.preventDefault();
                 alert('Please fill in all fields');
                 return;
             }
 
-            if (password !== confirmPassword) {
-                e.preventDefault();
-                alert('Passwords do not match');
-                return;
-            }
 
             if (!terms) {
                 e.preventDefault();
