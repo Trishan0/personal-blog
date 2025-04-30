@@ -1,4 +1,6 @@
 import express from 'express';
+import  session from "express-session";
+import MongoStore from "connect-mongo";
 import { userRouter } from "./src/routes/user.mjs";
 import {articleRouter} from "./src/routes/article.mjs";
 import {adminRouter} from "./src/routes/admin.mjs";
@@ -14,6 +16,14 @@ const __dirname = path.dirname(__filename);
 const app = express()
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(session({
+    secret: 'secret',
+    resave: false,
+    saveUninitialized: true,
+    store: MongoStore.create({
+        mongoUrl: process.env.MONGODB_URI,
+    })
+}))
 app.use(express.json());
 app.use(userRouter)
 app.use(articleRouter)
