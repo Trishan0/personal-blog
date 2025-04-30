@@ -1,4 +1,3 @@
-import express from 'express';
 import {Article} from "../models/article.mjs";
 const createNewArticle = async (req, res)=>{
     try {
@@ -6,7 +5,10 @@ const createNewArticle = async (req, res)=>{
         const article = await Article.create(articleData)
 
         if (article) {
-            res.status(201).redirect('/admin/new-article')
+            res.status(200).json({
+                success: true,
+                message: "Article Published successfully",
+            })
         }
 
     } catch (error) {
