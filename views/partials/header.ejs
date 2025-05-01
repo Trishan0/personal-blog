@@ -6,8 +6,9 @@
     <title>Modern Personal Blog</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/css/main.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@500;600;700&display=swap"
+          rel="stylesheet">
+    <link rel="stylesheet" href="/css/main.css"/>
 
     <% let stylesheets = (typeof links !== 'undefined') ? links : []; %>
     <% for (let i = 0; i < stylesheets.length; i++) { %>
@@ -20,24 +21,33 @@
         <div class="navbar">
             <a href="/" class="navbar-brand">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
-                    <path d="M20.71,4.63L19.37,3.29C19,2.9 18.35,2.9 17.96,3.29L9,12.25L11.75,15L20.71,6.04C21.1,5.65 21.1,5 20.71,4.63M7,14A3,3 0 0,0 4,17C4,18.31 2.84,19 2,19C2.92,20.22 4.5,21 6,21A4,4 0 0,0 10,17A3,3 0 0,0 7,14Z" />
+                    <path d="M20.71,4.63L19.37,3.29C19,2.9 18.35,2.9 17.96,3.29L9,12.25L11.75,15L20.71,6.04C21.1,5.65 21.1,5 20.71,4.63M7,14A3,3 0 0,0 4,17C4,18.31 2.84,19 2,19C2.92,20.22 4.5,21 6,21A4,4 0 0,0 10,17A3,3 0 0,0 7,14Z"/>
                 </svg>
                 Personal Blog
             </a>
 
             <ul class="navbar-menu">
                 <li><a href="/" class="active">Home</a></li>
-                <li><a href="/admin/new-article">New Article</a></li>
-                <li><a href="/admin/dashboard">Dashboard</a></li>
+                <% if (userRole === 'admin') { %>
+                    <li><a href="/admin/new-article">New Article</a></li>
+                    <li><a href="/admin/dashboard">Dashboard</a></li>
+                <% } %>
             </ul>
 
             <div class="navbar-auth">
-                <a href="/login" class="btn btn-outline btn-small login-btn">Login</a>
+                <% if (!userRole) { %>
+                    <a href="/login" class="btn btn-outline btn-small login-btn">Login</a>
+                <% } %>
+                <% if (userRole) { %>
+                    <form action="/logout" method="post" class="d-none" id="logoutForm">
+                        <button class="btn btn-outline btn-small login-btn">Logout</button>
+                    </form>
+                <% } %>
             </div>
 
             <button class="nav-toggle" aria-label="Toggle menu" onclick="toggleMobileMenu()">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                    <path d="M3,6H21V8H3V6M3,11H21V13H3V11M3,16H21V18H3V16Z" />
+                    <path d="M3,6H21V8H3V6M3,11H21V13H3V11M3,16H21V18H3V16Z"/>
                 </svg>
             </button>
         </div>
@@ -48,21 +58,23 @@
     <div class="mobile-menu-header">
         <div class="navbar-brand">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
-                <path d="M20.71,4.63L19.37,3.29C19,2.9 18.35,2.9 17.96,3.29L9,12.25L11.75,15L20.71,6.04C21.1,5.65 21.1,5 20.71,4.63M7,14A3,3 0 0,0 4,17C4,18.31 2.84,19 2,19C2.92,20.22 4.5,21 6,21A4,4 0 0,0 10,17A3,3 0 0,0 7,14Z" />
+                <path d="M20.71,4.63L19.37,3.29C19,2.9 18.35,2.9 17.96,3.29L9,12.25L11.75,15L20.71,6.04C21.1,5.65 21.1,5 20.71,4.63M7,14A3,3 0 0,0 4,17C4,18.31 2.84,19 2,19C2.92,20.22 4.5,21 6,21A4,4 0 0,0 10,17A3,3 0 0,0 7,14Z"/>
             </svg>
             Personal Blog
         </div>
         <button class="mobile-menu-close" aria-label="Close menu" onclick="toggleMobileMenu()">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                <path d="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z" />
+                <path d="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z"/>
             </svg>
         </button>
     </div>
 
     <ul class="mobile-menu-items">
         <li><a href="/">Home</a></li>
-        <li><a href="/admin/new-article">New Article</a></li>
-        <li><a href="/admin/dashboard">Dashboard</a></li>
+        <% if (userRole === 'admin') { %>
+            <li><a href="/admin/new-article">New Article</a></li>
+            <li><a href="/admin/dashboard">Dashboard</a></li>
+        <% } %>
         <li><a href="#">Login</a></li>
     </ul>
 </div>
