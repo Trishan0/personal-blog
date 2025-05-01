@@ -8,6 +8,7 @@ import {authRouter} from "./src/routes/auth.mjs";
 import path from "node:path";
 import {fileURLToPath} from "node:url";
 import { connectToDB } from "./src/database/db.mjs";
+import { setUserLocals } from "./src/middleware/auth.middleware.mjs";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -24,6 +25,7 @@ app.use(session({
         mongoUrl: process.env.MONGODB_URI,
     })
 }))
+app.use(setUserLocals)
 app.use(express.json());
 app.use(userRouter)
 app.use(articleRouter)
