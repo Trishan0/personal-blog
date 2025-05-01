@@ -76,7 +76,9 @@ const loginUser = async (req, res) => {
         req.session.user = {
             userId : user._id,
             email : user.email,
-            role : user.role
+            role : user.role,
+            firstname: user.firstname,
+            lastname : user.lastname
         }
         res.status(200).redirect('/admin/dashboard');
 
