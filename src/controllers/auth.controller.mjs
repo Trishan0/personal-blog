@@ -89,7 +89,18 @@ const loginUser = async (req, res) => {
         })
     }
 }
+
+const logoutUser = (req, res) => {
+    req.session.destroy(err => {
+        if (err) return res.status(500).send("Logout failed");
+        console.log("User logged out");
+        res.clearCookie('connect.sid');
+        res.redirect('/login');
+    });
+};
+
 export {
     registerUser,
-    loginUser
-}
+    loginUser,
+    logoutUser
+};
