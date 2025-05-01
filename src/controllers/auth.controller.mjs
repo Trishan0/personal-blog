@@ -80,7 +80,12 @@ const loginUser = async (req, res) => {
             firstname: user.firstname,
             lastname : user.lastname
         }
-        res.status(200).redirect('/admin/dashboard');
+
+        if (user.role === "admin") {
+            res.status(200).redirect('/admin/dashboard');
+        } else {
+            res.status(200).redirect('/');
+        }
 
 
     } catch (error) {
