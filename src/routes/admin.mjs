@@ -25,14 +25,14 @@ export const adminRouter = Router();
 //     })
 // })
 
-adminRouter.get('/admin/new-article', authMiddleware, isAdmin, (req, res)=>{
+adminRouter.get('/admin/new-article', authMiddleware, (req, res)=>{
     res.render('pages/admin/new-article',{
         links: ['/css/pages/new_article.css']
     })
 })
 
-adminRouter.post('/admin/new-article', authMiddleware, isAdmin, createNewArticle)
+adminRouter.post('/admin/new-article', authMiddleware, createNewArticle)
 adminRouter.get('/admin/dashboard',authMiddleware, getAllArticles('pages/admin/dashboard','/css/pages/dashboard.css'))
-adminRouter.delete('/admin/article/:id', authMiddleware, isAdmin, deleteArticle)
-adminRouter.get('/admin/edit-article/:id', authMiddleware, isAdmin, getArticleForEdit);
-adminRouter.put('/admin/article/:id', authMiddleware, isAdmin, updateArticle);
+adminRouter.delete('/admin/article/:id', authMiddleware, deleteArticle)
+adminRouter.get('/admin/edit-article/:id', authMiddleware, getArticleForEdit);
+adminRouter.put('/admin/article/:id', authMiddleware, updateArticle);
