@@ -1,7 +1,6 @@
 import {Router} from 'express';
-import { registerUser, loginUser } from "../controllers/auth.controller.mjs";
-import path from 'path';
-import {adminRouter} from "./admin.mjs"; //
+import { registerUser, loginUser, logoutUser } from "../controllers/auth.controller.mjs";
+import {adminRouter} from "./admin.mjs";
 
 export const authRouter = Router();
 
@@ -14,3 +13,4 @@ adminRouter.get('/login', (req, res)=>{
     res.render('pages/sign-up')
 })
 adminRouter.post('/login', loginUser);
+adminRouter.post('/logout', logoutUser);
