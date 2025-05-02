@@ -1,4 +1,7 @@
 import {Article} from "../models/article.mjs";
+import {User} from "../models/user.mjs";
+import { getAllArticles } from "./user.controller.mjs";
+
 const createNewArticle = async (req, res)=>{
     try {
         const articleData = req.body
@@ -101,9 +104,72 @@ const deleteArticle = async (req, res) => {
         });
     }
 };
+const deleteUser = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const deletedUser = await User.findOneAndDelete({ id: parseInt(id) });
+
+        if (!deletedUser) {
+            return res.status(404).json({
+                success: false,
+                message: "User not found"
+            });
+        }
+
+        // Redirect back to dashboard after successful deletion
+        res.status(200).json({
+            success: true,
+            message: "User deleted successfully"
+        });
+
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: "Failed to delete the User",
+            error: error.message
+        });
+    }
+};
+
+const getAllUsers = async () => {
+    try {
+        const users = await User.find({});
+
+        const groupedUsers = {
+            admins: users.filter(user => user.role === 'admin'),
+            regularUsers: users.filter(user => user.role === 'user')
+        };
+
+        return groupedUsers;
+
+    } catch (error) {
+        throw new Error("Failed to get users: " + error.message);
+    }
+};
+
+
+const getDashboardData = async (req, res, next) => {
+    try {
+        const { admins, regularUsers } = await getAllUsers();
+        const articles = await Article.find({}); // Directly fetch articles here
+
+        res.render('pages/admin/dashboard', {
+            articles,
+            admins,
+            users: regularUsers,
+            links: ['/css/pages/dashboard.css']
+        });
+
+    } catch (error) {
+        next(error);
+    }
+};
+
 export {
     createNewArticle,
     getArticleForEdit,
     updateArticle,
-    deleteArticle
+    deleteArticle,
+    getDashboardData,
+    deleteUser
 }
