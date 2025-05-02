@@ -7,15 +7,6 @@ const authMiddleware = (req, res, next) => {
     return res.redirect('/login');
 };
 
-const adminMiddleware = (req, res, next) => {
-    if (req.session && req.session.user && req.session.user.role === 'admin') {
-        req.userInfo = req.session.user;
-        return next();
-    }
-    return res.redirect('/');
-};
-
-
 const setUserGlobals = (req, res, next) => {
     const user = req.session?.user;
 
@@ -28,6 +19,5 @@ const setUserGlobals = (req, res, next) => {
 
 export {
     authMiddleware,
-    adminMiddleware,
     setUserGlobals
 }
