@@ -35,6 +35,8 @@
             </ul>
 
             <div class="navbar-auth">
+                <p class="user-name"><%= userFullName %></p>
+
                 <% if (!userRole) { %>
                     <a href="/login" class="btn btn-outline btn-small login-btn">Login</a>
                 <% } %>
@@ -75,7 +77,11 @@
             <li><a href="/admin/new-article">New Article</a></li>
             <li><a href="/admin/dashboard">Dashboard</a></li>
         <% } %>
-        <li><a href="#">Login</a></li>
+        <% if (!userRole) { %>
+            <li><a href="/login">Login</a></li>
+        <% } else { %>
+            <li><a href="#" onclick="document.getElementById('logoutForm').submit();">Logout</a></li>
+        <% } %>
     </ul>
 </div>
 
