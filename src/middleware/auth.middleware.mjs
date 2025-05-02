@@ -4,10 +4,7 @@ const authMiddleware = (req, res, next) => {
         return next();
     }
 
-    return res.status(401).json({
-        success: false,
-        message: "Access Denied"
-    });
+    return res.redirect('/login');
 };
 
 const adminMiddleware = (req, res, next) => {
@@ -15,12 +12,9 @@ const adminMiddleware = (req, res, next) => {
         req.userInfo = req.session.user;
         return next();
     }
-
-    return res.status(403).json({
-        success: false,
-        message: "Access Forbidden: Admin privileges required"
-    });
+    return res.redirect('/');
 };
+
 
 const setUserGlobals = (req, res, next) => {
     const user = req.session?.user;
