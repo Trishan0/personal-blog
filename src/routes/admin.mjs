@@ -2,7 +2,7 @@ import { Router } from "express";
 // import path from "node:path";
 // import { fileURLToPath } from "node:url";
 // import fs from "node:fs";
-import {createNewArticle, deleteArticle, getArticleForEdit, updateArticle} from "../controllers/admin.controller.mjs";
+import {createNewArticle, deleteArticle, getArticleForEdit, updateArticle, getDashboardData,deleteUser} from "../controllers/admin.controller.mjs";
 import {getAllArticles} from "../controllers/user.controller.mjs"
 import { adminMiddleware } from "../middleware/auth.middleware.mjs";
 
@@ -29,9 +29,9 @@ adminRouter.get('/admin/new-article', adminMiddleware , (req, res)=>{
         links: ['/css/pages/new_article.css']
     })
 })
-
 adminRouter.post('/admin/new-article', adminMiddleware , createNewArticle)
-adminRouter.get('/admin/dashboard',adminMiddleware , getAllArticles('pages/admin/dashboard','/css/pages/dashboard.css'))
+adminRouter.get('/admin/dashboard', adminMiddleware, getDashboardData);
 adminRouter.delete('/admin/article/:id', adminMiddleware , deleteArticle)
+adminRouter.delete('/admin/user/:id', adminMiddleware , deleteUser)
 adminRouter.get('/admin/edit-article/:id', adminMiddleware , getArticleForEdit);
 adminRouter.put('/admin/article/:id', adminMiddleware , updateArticle);
