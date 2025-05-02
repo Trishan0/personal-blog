@@ -107,7 +107,7 @@ const deleteArticle = async (req, res) => {
 const deleteUser = async (req, res) => {
     try {
         const { id } = req.params;
-        const deletedUser = await User.findOneAndDelete({ id: parseInt(id) });
+        const deletedUser = await User.findByIdAndDelete(id);
 
         if (!deletedUser) {
             return res.status(404).json({
@@ -116,7 +116,6 @@ const deleteUser = async (req, res) => {
             });
         }
 
-        // Redirect back to dashboard after successful deletion
         res.status(200).json({
             success: true,
             message: "User deleted successfully"
