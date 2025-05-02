@@ -4,7 +4,7 @@ export const articleRouter = Router();
 // import path from "node:path";
 // import {fileURLToPath} from "node:url";
 import { getArticleById } from "../controllers/user.controller.mjs";
-
+import { authMiddleware } from "../middleware/auth.middleware.mjs";
 // const __filename = fileURLToPath(import.meta.url);
 // const __dirname = path.dirname(__filename);
 
@@ -25,4 +25,4 @@ import { getArticleById } from "../controllers/user.controller.mjs";
 //     });
 // });
 
-articleRouter.get('/article/:id', getArticleById)
+articleRouter.get('/article/:id',authMiddleware, getArticleById)
