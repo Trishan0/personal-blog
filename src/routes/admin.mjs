@@ -4,7 +4,7 @@ import { Router } from "express";
 // import fs from "node:fs";
 import {createNewArticle, deleteArticle, getArticleForEdit, updateArticle, getDashboardData,deleteUser} from "../controllers/admin.controller.mjs";
 import {getAllArticles} from "../controllers/user.controller.mjs"
-import { adminMiddleware } from "../middleware/auth.middleware.mjs";
+import { adminMiddleware } from "../middleware/admin.middleware.mjs";
 
 // const __filename = fileURLToPath(import.meta.url);
 // const __dirname = path.dirname(__filename);
