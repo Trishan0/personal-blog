@@ -39,8 +39,7 @@ const registerUser = async (req, res) => {
         await newUser.save();
 
         if (newUser) {
-            // Use res.redirect() for HTML form submissions
-            return res.status(201).redirect('/');
+            return res.status(201).redirect('/login');
         } else {
             return res.status(400).json({
                 success: false,
