@@ -7,6 +7,36 @@ document.addEventListener('DOMContentLoaded', () => {
     const loginDes = document.getElementsByClassName('login-des');
     const regDes = document.getElementsByClassName('reg-des');
 
+    // Check if we're on the admin page
+    const isAdminPage = window.location.pathname.includes('/admin/');
+
+    // Update the form action and UI based on the page type
+    if (registerForm) {
+        const registerFormEl = registerForm.querySelector('form');
+        if (registerFormEl) {
+            // Set the correct form action based on the URL path
+            registerFormEl.action = isAdminPage ? '/admin/register' : '/register';
+        }
+
+        // Update UI elements for admin registration if needed
+        if (isAdminPage) {
+            // Change the header text for admin registration
+            for (const el of regDes) {
+                if (el.tagName === 'H1') {
+                    el.textContent = 'Create Admin Account';
+                } else if (el.tagName === 'P') {
+                    el.textContent = 'Register as an administrator';
+                }
+            }
+
+            // Update the submit button text
+            const submitBtn = registerFormEl.querySelector('button[type="submit"]');
+            if (submitBtn) {
+                submitBtn.textContent = 'Create Admin Account';
+            }
+        }
+    }
+
     function hideElements(elements) {
         for (const el of elements) {
             el.classList.add('hide');
@@ -114,7 +144,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 return;
             }
 
-
             if (!terms) {
                 e.preventDefault();
                 alert('Please agree to the terms');
@@ -123,7 +152,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // Visual feedback only - don't prevent default if validation passes
             const btn = registerFormEl.querySelector('button[type="submit"]');
-            btn.innerHTML = 'Creating account...';
+            btn.innerHTML = isAdminPage ? 'Creating admin account...' : 'Creating account...';
             // Don't disable the button or it won't submit
         });
     }
