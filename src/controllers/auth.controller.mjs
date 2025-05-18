@@ -1,61 +1,72 @@
 import { User } from "../models/user.mjs"
 import bcrypt from "bcryptjs"
 //register user
-const registerUser = async (req, res) => {
-    try {
-        console.log("Form data received:", req.body); // Add this for debugging
+const registerUser = (userRole) => {
+    return async (req, res) => {
+        try {
+            console.log("Form data received:", req.body);
+            console.log("Request URL:", req.originalUrl);
 
-        const { firstname, lastname, email, password } = req.body;
+            const { firstname, lastname, email, password } = req.body;
 
-        // Validation
-        if (!firstname || !lastname || !email || !password) {
-            return res.status(400).json({
+            // Validation
+            if (!firstname || !lastname || !email || !password) {
+                return res.status(400).json({
+                    success: false,
+                    message: "All fields are required"
+                });
+            }
+
+            const isUserExist = await User.findOne({email})
+            if (isUserExist) {
+                return res.status(400).json({
+                    success: false,
+                    message: "User already exists with this email"
+                })
+            }
+
+            // hash the password
+            const salt = await bcrypt.genSalt(10);
+            const hashedPassword = await bcrypt.hash(password, salt);
+
+            let role = userRole;
+            if (req.originalUrl.includes('/admin/') && role !== 'admin') {
+                console.log("URL path indicates admin registration but role was set to user. Correcting to admin.");
+                role = 'admin';
+            }
+
+            //create a new user
+            const newUser = new User({
+                firstname,
+                lastname,
+                email,
+                password: hashedPassword,
+                role: role,
+            })
+
+            await newUser.save();
+
+            if (newUser) {
+                console.log(`Successfully registered user with role: ${role}`);
+                return res.status(201).redirect('/login');
+            } else {
+                return res.status(400).json({
+                    success: false,
+                    message: "Something went wrong while creating user"
+                })
+            }
+
+        } catch (error) {
+            console.error("Registration error:", error);
+            return res.status(500).json({
                 success: false,
-                message: "All fields are required"
-            });
-        }
-
-        const isUserExist = await User.findOne({email})
-        if (isUserExist) {
-            return res.status(400).json({
-                success: false,
-                message: "User already exist with this email"
+                message: "Something went wrong",
+                error: error.message
             })
         }
-
-        // hash the password
-        const salt = await bcrypt.genSalt(10);
-        const hashedPassword = await bcrypt.hash(password, salt);
-
-        //create a new user
-        const newUser = new User({
-            firstname,
-            lastname,
-            email,
-            password: hashedPassword,
-            role: "user",
-        })
-
-        await newUser.save();
-
-        if (newUser) {
-            return res.status(201).redirect('/login');
-        } else {
-            return res.status(400).json({
-                success: false,
-                message: "Something went wrong while creating user"
-            })
-        }
-
-    } catch (error) {
-        console.error("Registration error:", error); // Better error logging
-        return res.status(500).json({
-            success: false,
-            message: "Something went wrong",
-            error: error.message
-        })
     }
 }
+
 
 
 const loginUser = async (req, res) => {
