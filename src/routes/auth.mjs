@@ -1,16 +1,24 @@
 import {Router} from 'express';
 import { registerUser, loginUser, logoutUser } from "../controllers/auth.controller.mjs";
-import {adminRouter} from "./admin.mjs";
 
 export const authRouter = Router();
 
-authRouter.post('/register', registerUser);
-authRouter.get('/register', (req, res)=>{
-    res.render('pages/sign-up')
-})
+// User registration routes
+authRouter.post('/register', registerUser('user'));
+authRouter.get('/register', (req, res) => {
+    res.render('pages/sign-up');
+});
 
-adminRouter.get('/login', (req, res)=>{
-    res.render('pages/sign-up')
-})
-adminRouter.post('/login', loginUser);
-adminRouter.post('/logout', logoutUser);
+// Admin registration routes
+authRouter.post('/admin/register', registerUser('admin'));
+authRouter.get('/admin/register', (req, res) => {
+    res.render('pages/sign-up');
+});
+
+// Login routes
+authRouter.get('/login', (req, res) => {
+    res.render('pages/sign-up');
+});
+authRouter.post('/login', loginUser);
+authRouter.post('/logout', logoutUser);
+
