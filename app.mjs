@@ -9,6 +9,7 @@ import path from "node:path";
 import {fileURLToPath} from "node:url";
 import { connectToDB } from "./src/database/db.mjs";
 import { setUserGlobals } from "./src/middleware/auth.middleware.mjs";
+import { APP_CONFIG } from "./src/config/index.mjs";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -38,8 +39,8 @@ app.set('view engine', 'ejs')
 
 
 connectToDB().then(() => {
-    app.listen(4000, () => {
-        console.log('Server is running on port 4000')
+    app.listen(APP_CONFIG.PORT, () => {
+        console.log(`Server is running on port ${APP_CONFIG.PORT}`)
     })
 }).catch(err => {
     console.error('Failed to connect to the database:', err)
