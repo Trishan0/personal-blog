@@ -9,8 +9,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon app.mjs",
-    "start": "node server"
-
+    "build": "echo \"No build step needed\"",
+    "start": "node app.mjs"
   },
   "dependencies": {
     "bcryptjs": "^3.0.2",
